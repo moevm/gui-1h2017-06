@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/firstbutton.png</file>
+        <file>image/close-button.png</file>
+        <file>image/button.png</file>
+        <file>image/game-center-ios7.jpg</file>
+        <file>image/socialphotobucketcircularbutton_80093.png</file>
+        <file>image/w264h2641393885391132.png</file>
+        <file>image/Filters.png</file>
+        <file>image/config.png</file>
+    </qresource>
+</RCC>
