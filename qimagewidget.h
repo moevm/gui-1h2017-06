@@ -14,26 +14,20 @@ public:
 private:
     QPixmap _originalImage;
     QString _noImageMessage;
-//    int _margin;
-//    QMargins _margins;
     QColor _backgroundColor;
+    QRect actualImageRect();
 public:
     void setPixmap(QPixmap pixmap);
     QPixmap pixmap(){
         return _originalImage;
     }
 
-//    int margin(){
-//        return _margin;
-//    }
 
 signals:
     void pixmapChanged();
-//    void marginChanged();
 
 public slots:
-//void setMargin(int value);
-    // QWidget interface
+
 protected:
     virtual void mouseDoubleClickEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);

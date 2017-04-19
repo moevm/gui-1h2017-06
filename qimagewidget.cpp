@@ -7,11 +7,15 @@ QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
 {
     _noImageMessage = "No Image";
     _backgroundColor = Qt::white;
-//    _margin = 4;
-
-
-//    connect(this, SIGNAL(marginChanged()), SLOT(repaint()));
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
+}
+
+QRect QImageWidget::actualImageRect()
+{
+    QRect imageRect = rect();
+    imageRect.setSize(_originalImage.size().scaled(size(), Qt::KeepAspectRatio));
+    imageRect.moveCenter(rect().center());
+    return imageRect;
 }
 
 void QImageWidget::setPixmap(QPixmap pixmap)
@@ -20,18 +24,6 @@ void QImageWidget::setPixmap(QPixmap pixmap)
     emit pixmapChanged();
 }
 
-//void QImageWidget::setMargin(int value)
-//{
-//    if (value < 2)
-//        value = 2;
-//    if (value > 20)
-//        value = 20;
-
-//    if (value != _margin){
-//        _margin = value;
-//        emit marginChanged();
-//    }
-//}
 
 
 void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
@@ -57,7 +49,7 @@ void QImageWidget::paintEvent(QPaintEvent *event)
     if (_originalImage.isNull()){
         painter.drawText(rect(), Qt::AlignCenter, _noImageMessage);
     }else{
-        QRect imageRect = rect();
+        QRect imageRect = actualImageRect();
         painter.drawPixmap(imageRect, _originalImage);
     }
 }
