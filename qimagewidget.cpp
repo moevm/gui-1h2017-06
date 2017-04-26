@@ -7,6 +7,7 @@ QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
 {
     _noImageMessage = "No Image";
     _backgroundColor = Qt::white;
+    filter = new Filter();
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
 }
 

@@ -2,9 +2,8 @@
 #define QIMAGEWIDGET_H
 
 #include <QWidget>
-#include <QPixmap>
 #include <QMargins>
-
+#include <filter.h>
 class QImageWidget : public QWidget
 {
     Q_OBJECT
@@ -16,6 +15,8 @@ private:
     QString _noImageMessage;
     QColor _backgroundColor;
     QRect actualImageRect();
+
+    Filter* filter;
 public:
     void setPixmap(QPixmap pixmap);
     QPixmap pixmap(){
