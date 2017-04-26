@@ -4,16 +4,21 @@
 #include <QPixmap>
 #include <QDebug>
 
-class Filter
+class Filter : public QObject
 {
+     Q_OBJECT
+
 private:
     QPixmap _filterImage;
 public:
     Filter();
 
-    int setImage(QPixmap _originalImage);
 
     QPixmap onFilter();
+
+
+public slots:
+    void setImage(QPixmap originalImage);
 };
 
 #endif // FILTER_H

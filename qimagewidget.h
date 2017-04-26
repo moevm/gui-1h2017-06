@@ -7,6 +7,7 @@
 class QImageWidget : public QWidget
 {
     Q_OBJECT
+
 public:
     explicit QImageWidget(QWidget *parent = 0);
 
@@ -26,6 +27,7 @@ public:
 
 signals:
     void pixmapChanged();
+    void changedImage(QPixmap);
 
 public slots:
 

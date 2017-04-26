@@ -25,12 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qimagewidget.cpp
+    qimagewidget.cpp \
+    filter.cpp
 
 HEADERS  += mainwindow.h \
-    qimagewidget.h
+    qimagewidget.h \
+    filter.h
 
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    image.qrc
+    image.qrc \
+    .gitignore

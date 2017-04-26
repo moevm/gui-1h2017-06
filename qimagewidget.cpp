@@ -9,6 +9,7 @@ QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
     _backgroundColor = Qt::white;
     filter = new Filter();
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
+    QObject::connect(this, SIGNAL(changedImage(QPixmap)), filter, SLOT(setImage(QPixmap)));
 }
 
 QRect QImageWidget::actualImageRect()
@@ -23,6 +24,7 @@ void QImageWidget::setPixmap(QPixmap pixmap)
 {
     _originalImage = pixmap;
     emit pixmapChanged();
+    emit changedImage(_originalImage);
 }
 
 
