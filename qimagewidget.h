@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include <QMargins>
-#include <filter.h>
+#include <QDebug>
+
 class QImageWidget : public QWidget
 {
     Q_OBJECT
@@ -11,26 +12,29 @@ class QImageWidget : public QWidget
 public:
     explicit QImageWidget(QWidget *parent = 0);
 
+    void setupFilter1();
+
 private:
+    QPixmap _viewImage;
     QPixmap _originalImage;
+    QPixmap _changedImage;
+
     QString _noImageMessage;
     QColor _backgroundColor;
     QRect actualImageRect();
 
-    Filter* filter;
 public:
     void setPixmap(QPixmap pixmap);
     QPixmap pixmap(){
-        return _originalImage;
+        return _viewImage;
     }
-
 
 signals:
     void pixmapChanged();
-    void changedImage(QPixmap);
+    void filteredImageChanged(QPixmap);
 
 public slots:
-
+    void setChangedImage(QPixmap);
 protected:
     virtual void mouseDoubleClickEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);

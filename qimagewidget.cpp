@@ -7,26 +7,23 @@ QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
 {
     _noImageMessage = "No Image";
     _backgroundColor = Qt::white;
-    filter = new Filter();
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
-    QObject::connect(this, SIGNAL(changedImage(QPixmap)), filter, SLOT(setImage(QPixmap)));
+    connect(this, SIGNAL(filteredImageChanged(QPixmap)), SLOT(setChangedImage(QPixmap)));
 }
 
 QRect QImageWidget::actualImageRect()
 {
     QRect imageRect = rect();
-    imageRect.setSize(_originalImage.size().scaled(size(), Qt::KeepAspectRatio));
+    imageRect.setSize(_viewImage.size().scaled(size(), Qt::KeepAspectRatio));
     imageRect.moveCenter(rect().center());
     return imageRect;
 }
 
 void QImageWidget::setPixmap(QPixmap pixmap)
 {
-    _originalImage = pixmap;
+    _viewImage = pixmap;
     emit pixmapChanged();
-    emit changedImage(_originalImage);
 }
-
 
 
 void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
@@ -36,7 +33,13 @@ void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
    QString filename = QFileDialog::getOpenFileName(this);
    if (filename.isEmpty())
        return;
-   setPixmap(QPixmap(filename));
+   try {
+       _originalImage = QPixmap(filename);
+       _changedImage = _originalImage;
+       setPixmap(_originalImage);
+   } catch(int e) {
+       qDebug() << "An exception occurred. Exception Nr. " << e << '\n';
+   }
 }
 
 void QImageWidget::paintEvent(QPaintEvent *event)
@@ -49,15 +52,26 @@ void QImageWidget::paintEvent(QPaintEvent *event)
     painter.drawRect(rect());
 
     painter.restore();
-    if (_originalImage.isNull()){
+    if (_viewImage.isNull()){
         painter.drawText(rect(), Qt::AlignCenter, _noImageMessage);
     }else{
         QRect imageRect = actualImageRect();
-        painter.drawPixmap(imageRect, _originalImage);
+        painter.drawPixmap(imageRect, _viewImage);
     }
 }
 
 
+void QImageWidget::setupFilter1()
+{
+////    here will be seting of filter
+//    QPixmap.setMask();
+//    _changedImage.setTexture(_changedImage.createMaskFromColor(QColor(0,255,255),Qt::MaskOutColor));
+    emit filteredImageChanged(_changedImage);
+}
 
 
+void QImageWidget::setChangedImage(QPixmap changedImage)
+{
+    setPixmap(changedImage);
+}
 
