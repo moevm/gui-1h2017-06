@@ -9,6 +9,7 @@ QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
     _backgroundColor = Qt::white;
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
     connect(this, SIGNAL(filteredImageChanged(QPixmap)), SLOT(setChangedImage(QPixmap)));
+
 }
 
 QRect QImageWidget::actualImageRect()
@@ -36,7 +37,7 @@ void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
    try {
        _originalImage = QPixmap(filename);
        _changedImage = _originalImage;
-       setPixmap(_originalImage);
+       setPixmap(_changedImage);
    } catch(int e) {
        qDebug() << "An exception occurred. Exception Nr. " << e << '\n';
    }
@@ -72,6 +73,36 @@ void QImageWidget::setupFilter1()
 
 void QImageWidget::setChangedImage(QPixmap changedImage)
 {
+
     setPixmap(changedImage);
+}
+
+//void QImageWidget::mousePressEvent(QMouseEvent *event)
+//{
+//    if(event->button() == Qt::LeftButton)
+//    {setPixmap(_originalImage);
+//    qDebug() << "показывает оригинал";}
+//    if(event->button() == Qt::RightButton)
+//    {
+//        setPixmap(_changedImage);
+//            qDebug() << "показывает оригинал2";
+//    }
+
+
+//}
+
+void QImageWidget::mousePress()
+{
+
+    setPixmap(_originalImage);
+        qDebug() << "показывает оригинал";
+
+}
+void QImageWidget::mousePress1()
+{
+
+    setPixmap(_changedImage);
+        qDebug() << "показывает обработанное изображение";
+
 }
 

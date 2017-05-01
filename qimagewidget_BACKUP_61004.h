@@ -2,7 +2,6 @@
 #define QIMAGEWIDGET_H
 
 #include <QWidget>
-#include <QPixmap>
 #include <QMargins>
 #include <QDebug>
 
@@ -15,39 +14,35 @@ public:
 
     void setupFilter1();
 
-    private:
+private:
     QPixmap _viewImage;
     QPixmap _originalImage;
     QPixmap _changedImage;
-
 
     QString _noImageMessage;
     QColor _backgroundColor;
     QRect actualImageRect();
 
-    public:
+public:
     void setPixmap(QPixmap pixmap);
+<<<<<<< Updated upstream
     QPixmap pixmap(){
         return _viewImage;
+=======
+    QPixmap pixmap() {
+        return _originalImage;
+>>>>>>> Stashed changes
     }
 
-    signals:
+signals:
     void pixmapChanged();
     void filteredImageChanged(QPixmap);
 
-
-    public slots:
+public slots:
     void setChangedImage(QPixmap);
-    //void mousePressEvent(QMouseEvent* event);
-    void mousePress();
-    void mousePress1();
-
-
-    protected:
+protected:
     virtual void mouseDoubleClickEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);
-
 };
 
 #endif // QIMAGEWIDGET_H
-

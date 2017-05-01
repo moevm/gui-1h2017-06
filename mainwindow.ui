@@ -249,6 +249,20 @@ background-color:white;
        </layout>
       </item>
       <item>
+       <widget class="QPushButton" name="original">
+        <property name="text">
+         <string>Original image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="changeImage">
+        <property name="text">
+         <string>The processed image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_3">
         <property name="font">
          <font>
@@ -379,8 +393,12 @@ background-color:#EB0015;
   <customwidget>
    <class>QImageWidget</class>
    <extends>QWidget</extends>
-   <header>qimagewidget.h</header>
+   <header location="global">qimagewidget.h</header>
    <container>1</container>
+   <slots>
+    <signal>pushButton_4(QMouseEvent*)</signal>
+    <slot>pushButton_4()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -393,7 +411,7 @@ background-color:#EB0015;
    <hints>
     <hint type="sourcelabel">
      <x>214</x>
-     <y>722</y>
+     <y>756</y>
     </hint>
     <hint type="destinationlabel">
      <x>51</x>

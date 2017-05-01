@@ -7,9 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/image/socialphotobucketcircularbutton_80093.png"));
-//    QImageWidget* image = new QImageWidget();
-//    ui->verticalLayout->addWidget(image);
-//    connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), image, SLOT(setMargin(int)));
+
+    QImageWidget* image = new QImageWidget();
+    connect(ui->original, SIGNAL(pressed()), image, SLOT(mousePress()));
+    connect(ui->changeImage, SIGNAL(pressed()), image, SLOT(mousePress1()));
     ui->widget_2->hide();
 }
 
@@ -22,3 +23,5 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     ////here enum with associating indexes and filters
 }
+
+
