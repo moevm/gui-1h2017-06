@@ -19,6 +19,7 @@ public:
     QPixmap _viewImage;
     QPixmap _originalImage;
     QPixmap _changedImage;
+    static QPixmap * _toSaveImage;
 
 
     QString _noImageMessage;
@@ -27,6 +28,7 @@ public:
 
     public:
     void setPixmap(QPixmap pixmap);
+    static void saveCurrentImage();
     QPixmap pixmap(){
         return _viewImage;
     }

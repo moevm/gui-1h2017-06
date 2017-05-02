@@ -328,7 +328,7 @@ background-color:#EB0015;
      <x>0</x>
      <y>0</y>
      <width>989</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -336,7 +336,6 @@ background-color:#EB0015;
      <string>File</string>
     </property>
     <addaction name="actionOk"/>
-    <addaction name="actionNo"/>
     <addaction name="action"/>
     <addaction name="separator"/>
     <addaction name="action_2"/>
@@ -362,19 +361,20 @@ background-color:#EB0015;
     <string>Открыть</string>
    </property>
   </action>
-  <action name="actionNo">
-   <property name="text">
-    <string>Сохранить</string>
-   </property>
-  </action>
   <action name="action_2">
    <property name="text">
     <string>Выход</string>
    </property>
   </action>
   <action name="action">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
-    <string>Сохранить как...</string>
+    <string>Сохранить как</string>
    </property>
   </action>
   <action name="action_3">
@@ -398,6 +398,7 @@ background-color:#EB0015;
    <slots>
     <signal>pushButton_4(QMouseEvent*)</signal>
     <slot>pushButton_4()</slot>
+    <slot>saveImageDefault(QAction*)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -410,8 +411,8 @@ background-color:#EB0015;
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>214</x>
-     <y>756</y>
+     <x>172</x>
+     <y>758</y>
     </hint>
     <hint type="destinationlabel">
      <x>51</x>
@@ -426,12 +427,12 @@ background-color:#EB0015;
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>143</x>
-     <y>189</y>
+     <x>115</x>
+     <y>157</y>
     </hint>
     <hint type="destinationlabel">
-     <x>199</x>
-     <y>368</y>
+     <x>170</x>
+     <y>583</y>
     </hint>
    </hints>
   </connection>
@@ -442,8 +443,8 @@ background-color:#EB0015;
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>211</x>
-     <y>189</y>
+     <x>169</x>
+     <y>157</y>
     </hint>
     <hint type="destinationlabel">
      <x>81</x>

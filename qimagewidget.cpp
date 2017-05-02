@@ -3,13 +3,14 @@
 #include <QPainter>
 #include <QFileDialog>
 
+QPixmap* QImageWidget::_toSaveImage;
+
 QImageWidget::QImageWidget(QWidget *parent) : QWidget(parent)
 {
     _noImageMessage = "No Image";
     _backgroundColor = Qt::white;
     connect(this, SIGNAL(pixmapChanged()), SLOT(repaint()));
     connect(this, SIGNAL(filteredImageChanged(QPixmap)), SLOT(setChangedImage(QPixmap)));
-
 }
 
 QRect QImageWidget::actualImageRect()
@@ -23,7 +24,14 @@ QRect QImageWidget::actualImageRect()
 void QImageWidget::setPixmap(QPixmap pixmap)
 {
     _viewImage = pixmap;
+    QImageWidget::_toSaveImage = &_viewImage;
     emit pixmapChanged();
+}
+
+void QImageWidget::saveCurrentImage()
+{
+    QString fileName = QFileDialog::getSaveFileName(0, "Сохранить как", QDir::currentPath(), "PNG (*.png);;JPG (*.jpg);; BMP (*.bmp)");
+    QImageWidget::_toSaveImage->save(fileName,"PNG");
 }
 
 
@@ -105,4 +113,3 @@ void QImageWidget::mousePress1()
         qDebug() << "показывает обработанное изображение";
 
 }
-
