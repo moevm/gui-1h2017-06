@@ -69,6 +69,15 @@ border:none;
           <property name="editable">
            <bool>false</bool>
           </property>
+          <property name="currentText">
+           <string>По умолчанию</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+          </property>
           <item>
            <property name="text">
             <string>По умолчанию</string>
@@ -76,7 +85,7 @@ border:none;
           </item>
           <item>
            <property name="text">
-            <string>1</string>
+            <string>Negative</string>
            </property>
           </item>
           <item>
@@ -399,6 +408,9 @@ background-color:#EB0015;
     <signal>pushButton_4(QMouseEvent*)</signal>
     <slot>pushButton_4()</slot>
     <slot>saveImageDefault(QAction*)</slot>
+    <slot>setupFilter(int)</slot>
+    <slot>mousePress()</slot>
+    <slot>mousePress1()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -449,6 +461,54 @@ background-color:#EB0015;
     <hint type="destinationlabel">
      <x>81</x>
      <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>setupFilter(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>original</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>mousePress()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>123</x>
+     <y>687</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>653</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changeImage</sender>
+   <signal>clicked()</signal>
+   <receiver>widget</receiver>
+   <slot>mousePress1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>165</x>
+     <y>716</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>713</y>
     </hint>
    </hints>
   </connection>

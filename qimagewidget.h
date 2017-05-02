@@ -14,7 +14,7 @@ public:
     explicit QImageWidget(QWidget *parent = 0);
 
     void setupFilter1();
-
+    void setupNegativeFilter();
     private:
     QPixmap _viewImage;
     QPixmap _originalImage;
@@ -43,6 +43,7 @@ public:
     //void mousePressEvent(QMouseEvent* event);
     void mousePress();
     void mousePress1();
+    void setupFilter(int choosen);
 
 
     protected:

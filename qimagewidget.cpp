@@ -44,7 +44,8 @@ void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
        return;
    try {
        _originalImage = QPixmap(filename);
-       _changedImage = _originalImage;
+       _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
+       //_changedImage = QPixmap(filename);
        setPixmap(_changedImage);
    } catch(int e) {
        qDebug() << "An exception occurred. Exception Nr. " << e << '\n';
@@ -76,6 +77,21 @@ void QImageWidget::setupFilter1()
 //    QPixmap.setMask();
 //    _changedImage.setTexture(_changedImage.createMaskFromColor(QColor(0,255,255),Qt::MaskOutColor));
     emit filteredImageChanged(_changedImage);
+}
+
+void QImageWidget::setupNegativeFilter()
+{
+    QImage editableImage = _changedImage.toImage();
+    QRgb value;
+    for (int i = 0; i < editableImage.height(); i++) {
+        for (int j = 0; j < editableImage.width(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            value = qRgb(255 - sourceColor.red(), 255 - sourceColor.green(), 255 - sourceColor.blue());
+            editableImage.setPixel(i,j,value);
+        }
+    }
+    _changedImage = QPixmap::fromImage(editableImage);
+    setPixmap(_changedImage);
 }
 
 
@@ -113,3 +129,9 @@ void QImageWidget::mousePress1()
         qDebug() << "показывает обработанное изображение";
 
 }
+
+void QImageWidget::setupFilter(int choosen)
+{
+    if (choosen == 1) setupNegativeFilter();
+}
+

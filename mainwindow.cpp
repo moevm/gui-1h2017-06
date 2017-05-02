@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QImageWidget* image = new QImageWidget();
     setQImageWidget(image);
-    connect(ui->original, SIGNAL(pressed()), image, SLOT(mousePress()));
-    connect(ui->changeImage, SIGNAL(pressed()), image, SLOT(mousePress1()));
+    //connect(ui->original, SIGNAL(pressed()), image, SLOT(mousePress()));
+    //connect(ui->changeImage, SIGNAL(pressed()), image, SLOT(mousePress1()));
     ui->widget_2->hide();
 }
 
