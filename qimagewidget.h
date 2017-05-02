@@ -15,6 +15,8 @@ public:
 
     void setupFilter1();
     void setupNegativeFilter();
+    void setupSepiaFilter();
+    void setupGrayScaleFilter();
     private:
     QPixmap _viewImage;
     QPixmap _originalImage;

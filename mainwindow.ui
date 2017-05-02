@@ -85,17 +85,17 @@ border:none;
           </item>
           <item>
            <property name="text">
-            <string>Negative</string>
+            <string>Негатив</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>2</string>
+            <string>Сепия</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>3</string>
+            <string>Черно-белый</string>
            </property>
           </item>
           <item>
