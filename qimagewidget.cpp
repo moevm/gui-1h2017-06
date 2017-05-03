@@ -83,8 +83,8 @@ void QImageWidget::setupNegativeFilter()
 {
     QImage editableImage = _originalImage.toImage();
     QRgb value;
-    for (int i = 0; i < editableImage.height(); i++) {
-        for (int j = 0; j < editableImage.width(); j++) {
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
             QColor sourceColor = editableImage.pixel(i,j);
             value = qRgb(255 - sourceColor.red(), 255 - sourceColor.green(), 255 - sourceColor.blue());
             editableImage.setPixel(i,j,value);
@@ -98,8 +98,8 @@ void QImageWidget::setupSepiaFilter()
 {
     QImage editableImage = _originalImage.toImage();
     QRgb value;
-    for (int i = 0; i < editableImage.height(); i++) {
-        for (int j = 0; j < editableImage.width(); j++) {
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
             QColor sourceColor = editableImage.pixel(i,j);
             int tone = (int)(0.299 * sourceColor.red() + 0.587 * sourceColor.green() + 0.114 * sourceColor.blue());
             value = qRgb(tone > 206 ? 255 : tone + 49, tone < 14 ? 0 : tone - 14, tone < 56 ? 0 : tone - 56);
@@ -118,12 +118,14 @@ void QImageWidget::setupGrayScaleFilter()
     //float cr = 0.500f, cg = 0.419f, cb = 0.081f;
     //float cr = 0.2125f, cg = 0.7154f, cb = 0.0721f;
     float cr = 0.333f, cg = 0.333f, cb = 0.333f;
-    for (int i = 0; i < editableImage.height(); i++) {
-        for (int j = 0; j < editableImage.width(); j++) {
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            if (!editableImage.isNull()) {
             QColor sourceColor = editableImage.pixel(i,j);
             float gray = (float)(sourceColor.red()*cr + sourceColor.green()*cg + sourceColor.blue()*cb);
             value = qRgb(gray, gray, gray);
             editableImage.setPixel(i,j,value);
+            }
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
