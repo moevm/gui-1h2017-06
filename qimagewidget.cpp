@@ -43,6 +43,7 @@ void QImageWidget::mouseDoubleClickEvent(QMouseEvent *event)
    if (filename.isEmpty())
        return;
    try {
+       emit newImageLoaded(0);
        _originalImage = QPixmap(filename);
        _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
        //_changedImage = QPixmap(filename);
@@ -132,6 +133,24 @@ void QImageWidget::setupGrayScaleFilter()
     setPixmap(_changedImage);
 }
 
+void QImageWidget::setupBinaryGrayFilter()
+{
+    QImage editableImage = _originalImage.toImage();
+    QRgb value;
+    int adjustment = 290;
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            float gray = (float)(sourceColor.red() + sourceColor.green() + sourceColor.blue());
+            if (gray > adjustment) value = qRgb(255, 255, 255);
+            else value = qRgb(0, 0, 0);
+            editableImage.setPixel(i,j,value);
+        }
+    }
+    _changedImage = QPixmap::fromImage(editableImage);
+    setPixmap(_changedImage);
+}
+
 
 void QImageWidget::setChangedImage(QPixmap changedImage)
 {
@@ -171,6 +190,10 @@ void QImageWidget::mousePress1()
 void QImageWidget::setupFilter(int choosen)
 {
     switch(choosen) {
+    case (0):
+        _changedImage = _originalImage;
+        setPixmap(_changedImage);
+        break;
     case (1):
         setupNegativeFilter();
         break;
@@ -180,7 +203,11 @@ void QImageWidget::setupFilter(int choosen)
     case(3):
         setupGrayScaleFilter();
         break;
+    case(4):
+        setupBinaryGrayFilter();
+        break;
     }
+
 
 
 }

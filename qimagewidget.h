@@ -17,6 +17,7 @@ public:
     void setupNegativeFilter();
     void setupSepiaFilter();
     void setupGrayScaleFilter();
+    void setupBinaryGrayFilter();
     private:
     QPixmap _viewImage;
     QPixmap _originalImage;
@@ -38,6 +39,7 @@ public:
     signals:
     void pixmapChanged();
     void filteredImageChanged(QPixmap);
+    void newImageLoaded(int newIndex);
 
 
     public slots:

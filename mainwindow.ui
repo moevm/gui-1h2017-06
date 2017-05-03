@@ -100,7 +100,7 @@ border:none;
           </item>
           <item>
            <property name="text">
-            <string>4</string>
+            <string>Moon</string>
            </property>
           </item>
          </widget>
@@ -406,6 +406,7 @@ background-color:#EB0015;
    <container>1</container>
    <slots>
     <signal>pushButton_4(QMouseEvent*)</signal>
+    <signal>newImageLoaded(int)</signal>
     <slot>pushButton_4()</slot>
     <slot>saveImageDefault(QAction*)</slot>
     <slot>setupFilter(int)</slot>
@@ -509,6 +510,22 @@ background-color:#EB0015;
     <hint type="destinationlabel">
      <x>205</x>
      <y>713</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>newImageLoaded(int)</signal>
+   <receiver>comboBox</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>230</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>112</x>
+     <y>74</y>
     </hint>
    </hints>
   </connection>
