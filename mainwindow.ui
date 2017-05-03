@@ -70,7 +70,7 @@ border:none;
            <bool>false</bool>
           </property>
           <property name="currentText">
-           <string>По умолчанию</string>
+           <string>Без фильтра</string>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -80,7 +80,7 @@ border:none;
           </property>
           <item>
            <property name="text">
-            <string>По умолчанию</string>
+            <string>Без фильтра</string>
            </property>
           </item>
           <item>
@@ -238,6 +238,174 @@ background-color:white;
 }
 </string>
             </property>
+            <widget class="QLabel" name="label_3">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>40</y>
+               <width>47</width>
+               <height>13</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Яркость:</string>
+             </property>
+            </widget>
+            <widget class="QSlider" name="horizontalSlider">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>60</y>
+               <width>161</width>
+               <height>19</height>
+              </rect>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
+             <property name="pageStep">
+              <number>10</number>
+             </property>
+             <property name="tracking">
+              <bool>true</bool>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="invertedAppearance">
+              <bool>true</bool>
+             </property>
+             <property name="invertedControls">
+              <bool>true</bool>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>20</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_4">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>100</y>
+               <width>91</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Контрастность:</string>
+             </property>
+            </widget>
+            <widget class="QSlider" name="horizontalSlider_2">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>120</y>
+               <width>161</width>
+               <height>19</height>
+              </rect>
+             </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>20</number>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_5">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>160</y>
+               <width>61</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Резкость:</string>
+             </property>
+            </widget>
+            <widget class="QSlider" name="horizontalSlider_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>180</y>
+               <width>160</width>
+               <height>19</height>
+              </rect>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_6">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>220</y>
+               <width>81</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Температура:</string>
+             </property>
+            </widget>
+            <widget class="QSlider" name="horizontalSlider_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>240</y>
+               <width>160</width>
+               <height>19</height>
+              </rect>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_7">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>10</y>
+               <width>161</width>
+               <height>20</height>
+              </rect>
+             </property>
+             <property name="lineWidth">
+              <number>1</number>
+             </property>
+             <property name="midLineWidth">
+              <number>0</number>
+             </property>
+             <property name="text">
+              <string>Пользовательские настройки</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -412,6 +580,11 @@ background-color:#EB0015;
     <slot>setupFilter(int)</slot>
     <slot>mousePress()</slot>
     <slot>mousePress1()</slot>
+    <slot>brightnessChanged(int)</slot>
+    <slot>contrastChanged(int)</slot>
+    <slot>sharpnessChanged(int)</slot>
+    <slot>temperatureChanged(int)</slot>
+    <slot>sliderValueChanged()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -526,6 +699,134 @@ background-color:#EB0015;
     <hint type="destinationlabel">
      <x>112</x>
      <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>widget</receiver>
+   <slot>sliderValueChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>267</x>
+     <y>313</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>widget</receiver>
+   <slot>sliderValueChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>345</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>255</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>widget</receiver>
+   <slot>sliderValueChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>405</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>212</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_4</sender>
+   <signal>sliderReleased()</signal>
+   <receiver>widget</receiver>
+   <slot>sliderValueChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>486</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>brightnessChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>226</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>contrastChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>142</x>
+     <y>346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>387</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_3</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>sharpnessChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>147</x>
+     <y>408</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider_4</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>temperatureChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>513</y>
     </hint>
    </hints>
   </connection>

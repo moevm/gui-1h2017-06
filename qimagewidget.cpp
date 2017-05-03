@@ -151,6 +151,71 @@ void QImageWidget::setupBinaryGrayFilter()
     setPixmap(_changedImage);
 }
 
+void QImageWidget::setupBrightness(int brightness)
+{
+    QImage editableImage = _changedImage.toImage();
+    QRgb value;
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            int newRed = sourceColor.red() + brightness;
+            if (newRed > 255) newRed = 255;
+            if (newRed < 0) newRed = 0;
+
+            int newGreen = sourceColor.green() + brightness;
+            if (newGreen > 255) newGreen = 255;
+            if (newGreen < 0) newGreen = 0;
+
+            int newBlue = sourceColor.blue() + brightness;
+            if (newBlue > 255) newBlue = 255;
+            if (newBlue < 0) newBlue = 0;
+            value = qRgb(newRed, newGreen, newBlue);
+            editableImage.setPixel(i,j,value);
+        }
+    }
+    _changedImage = QPixmap::fromImage(editableImage);
+}
+
+void QImageWidget::setupContrast(int contrast)
+{
+    QImage editableImage = _changedImage.toImage();
+    QRgb value;
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            float tmpContrast = (100.0f+contrast)/100.0f;
+            tmpContrast *= tmpContrast;
+
+            float newRed = sourceColor.red()/255.0;
+            newRed -= 0.5;
+            newRed *= tmpContrast;
+            newRed += 0.5;
+            newRed *= 255;
+            if (newRed > 255) newRed = 255;
+            if (newRed < 0) newRed = 0;
+
+            float newGreen = sourceColor.green()/255.0;
+            newGreen -= 0.5;
+            newGreen *= tmpContrast;
+            newGreen += 0.5;
+            newGreen *= 255;
+            if (newGreen > 255) newGreen = 255;
+            if (newGreen < 0) newGreen = 0;
+
+            float newBlue = sourceColor.blue()/255.0;
+            newBlue -= 0.5;
+            newBlue *= tmpContrast;
+            newBlue += 0.5;
+            newBlue *= 255;
+            if (newBlue > 255) newBlue = 255;
+            if (newBlue < 0) newBlue = 0;
+            value = qRgb(newRed, newGreen, newBlue);
+            editableImage.setPixel(i,j,value);
+        }
+    }
+    _changedImage = QPixmap::fromImage(editableImage);
+}
+
 
 void QImageWidget::setChangedImage(QPixmap changedImage)
 {
@@ -207,8 +272,34 @@ void QImageWidget::setupFilter(int choosen)
         setupBinaryGrayFilter();
         break;
     }
+}
+
+void QImageWidget::brightnessChanged(int brightness)
+{
+    this->brightness = brightness;
+}
+
+void QImageWidget::sharpnessChanged(int sharpness)
+{
+
+}
+
+void QImageWidget::contrastChanged(int contrast)
+{
+    this->contrast = contrast;
+}
+
+void QImageWidget::temperatureChanged(int temperature)
+{
+
+}
 
 
-
+void QImageWidget::sliderValueChanged()
+{
+    _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
+    setupBrightness(this->brightness);
+    setupContrast(this->contrast);
+    setPixmap(_changedImage);
 }
 

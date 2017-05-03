@@ -18,11 +18,16 @@ public:
     void setupSepiaFilter();
     void setupGrayScaleFilter();
     void setupBinaryGrayFilter();
+    void setupBrightness(int brightness);
+    void setupContrast(int contrast);
+
     private:
     QPixmap _viewImage;
     QPixmap _originalImage;
     QPixmap _changedImage;
     static QPixmap * _toSaveImage;
+    int brightness = 0;
+    int contrast = 0;
 
 
     QString _noImageMessage;
@@ -48,6 +53,11 @@ public:
     void mousePress();
     void mousePress1();
     void setupFilter(int choosen);
+    void brightnessChanged(int brightness);
+    void sharpnessChanged(int sharpness);
+    void contrastChanged(int contrast);
+    void temperatureChanged(int temperature);
+    void sliderValueChanged();
 
 
     protected:
