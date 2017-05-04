@@ -28,6 +28,7 @@ public:
     static QPixmap * _toSaveImage;
     int brightness = 0;
     int contrast = 0;
+    int temperature = 0;
 
 
     QString _noImageMessage;
@@ -58,6 +59,8 @@ public:
     void contrastChanged(int contrast);
     void temperatureChanged(int temperature);
     void sliderValueChanged();
+    void leftRotate();
+    void rightRotate();
 
 
     protected:

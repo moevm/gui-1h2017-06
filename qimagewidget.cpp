@@ -216,6 +216,42 @@ void QImageWidget::setupContrast(int contrast)
     _changedImage = QPixmap::fromImage(editableImage);
 }
 
+void QImageWidget::rightRotate()
+{
+    QImage editableImage = _changedImage.toImage();
+    QImage resultImage = editableImage.copy(0,0,editableImage.height(),editableImage.width());
+    QImage alpha = resultImage.alphaChannel();
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            int a = qAlpha(editableImage.pixel(i,j));
+            resultImage.setPixel(editableImage.height() - j - 1, i,sourceColor.rgb());
+            alpha.setPixel(editableImage.height() - j - 1, i, a);
+        }
+    }
+    resultImage.setAlphaChannel(alpha);
+    _changedImage = QPixmap::fromImage(resultImage);
+    setPixmap(_changedImage);
+}
+
+void QImageWidget::leftRotate()
+{
+    QImage editableImage = _changedImage.toImage();
+    QImage resultImage = editableImage.copy(0,0,editableImage.height(),editableImage.width());
+    QImage alpha = resultImage.alphaChannel();
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            int a = qAlpha(editableImage.pixel(i,j));
+            resultImage.setPixel(j,editableImage.width() - i - 1,sourceColor.rgb());
+            alpha.setPixel(j, editableImage.width() - i - 1, a);
+        }
+    }
+    resultImage.setAlphaChannel(alpha);
+    _changedImage = QPixmap::fromImage(resultImage);
+    setPixmap(_changedImage);
+}
+
 
 void QImageWidget::setChangedImage(QPixmap changedImage)
 {
@@ -277,6 +313,7 @@ void QImageWidget::setupFilter(int choosen)
 void QImageWidget::brightnessChanged(int brightness)
 {
     this->brightness = brightness;
+    sliderValueChanged();
 }
 
 void QImageWidget::sharpnessChanged(int sharpness)
@@ -287,6 +324,7 @@ void QImageWidget::sharpnessChanged(int sharpness)
 void QImageWidget::contrastChanged(int contrast)
 {
     this->contrast = contrast;
+    sliderValueChanged();
 }
 
 void QImageWidget::temperatureChanged(int temperature)
