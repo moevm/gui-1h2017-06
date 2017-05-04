@@ -380,8 +380,23 @@ background-color:white;
                <height>19</height>
               </rect>
              </property>
+             <property name="minimum">
+              <number>-65</number>
+             </property>
+             <property name="maximum">
+              <number>65</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>20</number>
              </property>
             </widget>
             <widget class="QLabel" name="label_7">
@@ -505,7 +520,7 @@ background-color:#EB0015;
      <x>0</x>
      <y>0</y>
      <width>989</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

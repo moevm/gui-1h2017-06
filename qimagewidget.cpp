@@ -216,6 +216,61 @@ void QImageWidget::setupContrast(int contrast)
     _changedImage = QPixmap::fromImage(editableImage);
 }
 
+void QImageWidget::setupTemperature(int temperature)
+{
+    QImage editableImage = _changedImage.toImage();
+    QRgb value;
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+//            int newRed = sourceColor.red() + temperature*1.5;
+//            if (newRed > 255) newRed = 255;
+//            if (newRed < 0) newRed = 0;
+
+//            int newGreen = sourceColor.green() + temperature/1.8;
+//            if (newGreen > 255) newGreen = 255;
+//            if (newGreen < 0) newGreen = 0;
+
+//            int newBlue = sourceColor.blue() + temperature/16;
+//            if (newBlue > 255) newBlue = 255;
+//            if (newBlue < 0) newBlue = 0;
+            int newRed;
+            if(temperature < 0)
+                newRed = sourceColor.red() + temperature*1.9 + 0;
+            else newRed = sourceColor.red() + temperature*1.8 + 10;
+            if (newRed > 255) newRed = 255;
+            if (newRed < 0) newRed = 0;
+
+            int newGreen;
+            if (temperature < 0)
+            newGreen = sourceColor.green() + temperature/1.3 + 10;
+            else
+            newGreen = sourceColor.green() + temperature/1.0 + 10 ;
+            if (newGreen > 255) newGreen = 255;
+            if (newGreen < 0) newGreen = 0;
+
+            int newBlue;
+            if (temperature < 0) newBlue = sourceColor.blue() + temperature/16 + 10;
+            else newBlue = sourceColor.blue() + temperature/18 + 10;
+            if (newBlue > 255) newBlue = 255;
+            if (newBlue < 0) newBlue = 0;
+
+
+            value = qRgb(newRed, newGreen, newBlue);
+            editableImage.setPixel(i,j,value);
+
+
+
+        }
+    }
+    _changedImage = QPixmap::fromImage(editableImage);
+
+}
+
+
+
+
+
 
 void QImageWidget::setChangedImage(QPixmap changedImage)
 {
@@ -241,14 +296,13 @@ void QImageWidget::mousePress()
 {
 
     setPixmap(_originalImage);
-        //qDebug() << "показывает оригинал";
+
 
 }
 void QImageWidget::mousePress1()
 {
 
     setPixmap(_changedImage);
-        //qDebug() << "показывает обработанное изображение";
 
 }
 
@@ -291,7 +345,7 @@ void QImageWidget::contrastChanged(int contrast)
 
 void QImageWidget::temperatureChanged(int temperature)
 {
-
+    this->temperature = temperature;
 }
 
 
@@ -300,6 +354,7 @@ void QImageWidget::sliderValueChanged()
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupBrightness(this->brightness);
     setupContrast(this->contrast);
+    setupTemperature(this->temperature);
     setPixmap(_changedImage);
 }
 
