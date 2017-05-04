@@ -431,6 +431,7 @@ void QImageWidget::sliderValueChanged()
     setPixmap(_changedImage);
 }
 
+
 void QImageWidget::sliderBrightnessValueChanged() {
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupBrightness(this->brightness);
