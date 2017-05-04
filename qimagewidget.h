@@ -21,8 +21,9 @@ public:
     void setupBrightness(int brightness);
     void setupContrast(int contrast);
     void setupTemperature(int temperature);
+    void setupSharpness(int sharpness);
 
-    private:
+private:
     QPixmap _viewImage;
     QPixmap _originalImage;
     QPixmap _changedImage;
@@ -30,6 +31,10 @@ public:
     int brightness = 0;
     int contrast = 0;
     int temperature = 0;
+    int sharpness = 15;
+        int weight = 0;
+        int factor = 6;
+        int offset = 0;
 
 
     QString _noImageMessage;
@@ -60,9 +65,14 @@ public:
     void contrastChanged(int contrast);
     void temperatureChanged(int temperature);
     void sliderValueChanged();
-    void leftRotate();
-    void rightRotate();
+    void sliderSharpnessValueChanged();
+    void sliderBrightnessValueChanged();
+    void sliderContrastValueChanged();
+    void sliderTemperatureValueChanged();
 
+    void sharpnessWeightChanged(int);
+    void sharpnessFactorChanged(int);
+    void sharpnessOffsetChanged(int);
 
     protected:
     virtual void mouseDoubleClickEvent(QMouseEvent *event);

@@ -35,3 +35,4 @@ void MainWindow::setQImageWidget(QImageWidget *image)
 {
     this->image = image;
 }
+
