@@ -150,15 +150,15 @@ void QImageWidget::setupBrightness(int brightness)
     for (int i = 0; i < editableImage.width(); i++) {
         for (int j = 0; j < editableImage.height(); j++) {
             QColor sourceColor = editableImage.pixel(i,j);
-            int newRed = sourceColor.red() + brightness;
+            int newRed = sourceColor.red() - brightness;
             if (newRed > 255) newRed = 255;
             if (newRed < 0) newRed = 0;
 
-            int newGreen = sourceColor.green() + brightness;
+            int newGreen = sourceColor.green() - brightness;
             if (newGreen > 255) newGreen = 255;
             if (newGreen < 0) newGreen = 0;
 
-            int newBlue = sourceColor.blue() + brightness;
+            int newBlue = sourceColor.blue() - brightness;
             if (newBlue > 255) newBlue = 255;
             if (newBlue < 0) newBlue = 0;
             value = qRgb(newRed, newGreen, newBlue);

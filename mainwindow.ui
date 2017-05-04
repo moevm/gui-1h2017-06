@@ -504,8 +504,8 @@ background-color:#EB0015;
       <widget class="QWidget" name="verticalLayoutWidget">
        <property name="geometry">
         <rect>
-         <x>590</x>
-         <y>590</y>
+         <x>720</x>
+         <y>690</y>
          <width>211</width>
          <height>137</height>
         </rect>
@@ -576,8 +576,6 @@ background-color:#EB0015;
         </item>
        </layout>
       </widget>
-      <zorder>verticalLayoutWidget</zorder>
-      <zorder>label_8</zorder>
      </widget>
     </item>
    </layout>
@@ -671,7 +669,7 @@ background-color:#EB0015;
     <slot>sliderBrightnessValueChanged()</slot>
     <slot>sliderContrastValueChanged()</slot>
     <slot>sliderSharpnessValueChanged()</slot>
-	<slot>sliderTemperatureValueChanged()</slot>
+    <slot>sliderTemperatureValueChanged()</slot>
     <slot>sharpnessWeightChanged(int)</slot>
     <slot>sharpnessFactorChanged(int)</slot>
     <slot>sharpnessOffsetChanged(int)</slot>
