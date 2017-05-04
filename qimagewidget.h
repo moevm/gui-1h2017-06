@@ -70,6 +70,9 @@ private:
     void sliderContrastValueChanged();
     void sliderTemperatureValueChanged();
 
+    void leftRotate();
+    void rightRotate();
+
     void sharpnessWeightChanged(int);
     void sharpnessFactorChanged(int);
     void sharpnessOffsetChanged(int);

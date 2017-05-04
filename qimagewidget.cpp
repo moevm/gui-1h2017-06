@@ -208,6 +208,42 @@ void QImageWidget::setupContrast(int contrast)
     _changedImage = QPixmap::fromImage(editableImage);
 }
 
+void QImageWidget::rightRotate()
+{
+    QImage editableImage = _changedImage.toImage();
+    QImage resultImage = editableImage.copy(0,0,editableImage.height(),editableImage.width());
+    QImage alpha = resultImage.alphaChannel();
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            int a = qAlpha(editableImage.pixel(i,j));
+            resultImage.setPixel(editableImage.height() - j - 1, i,sourceColor.rgb());
+            alpha.setPixel(editableImage.height() - j - 1, i, a);
+        }
+    }
+    resultImage.setAlphaChannel(alpha);
+    _changedImage = QPixmap::fromImage(resultImage);
+    setPixmap(_changedImage);
+}
+
+void QImageWidget::leftRotate()
+{
+    QImage editableImage = _changedImage.toImage();
+    QImage resultImage = editableImage.copy(0,0,editableImage.height(),editableImage.width());
+    QImage alpha = resultImage.alphaChannel();
+    for (int i = 0; i < editableImage.width(); i++) {
+        for (int j = 0; j < editableImage.height(); j++) {
+            QColor sourceColor = editableImage.pixel(i,j);
+            int a = qAlpha(editableImage.pixel(i,j));
+            resultImage.setPixel(j,editableImage.width() - i - 1,sourceColor.rgb());
+            alpha.setPixel(j, editableImage.width() - i - 1, a);
+        }
+    }
+    resultImage.setAlphaChannel(alpha);
+    _changedImage = QPixmap::fromImage(resultImage);
+    setPixmap(_changedImage);
+}
+
 
 void QImageWidget::setupTemperature(int temperature)
 {
@@ -229,22 +265,22 @@ void QImageWidget::setupTemperature(int temperature)
 //            if (newBlue < 0) newBlue = 0;
             int newRed;
             if(temperature < 0)
-                newRed = sourceColor.red() + temperature*1.9 + 0;
-            else newRed = sourceColor.red() + temperature*1.8 + 10;
+                newRed = sourceColor.red() + temperature;
+            else newRed = sourceColor.red() + temperature;
             if (newRed > 255) newRed = 255;
             if (newRed < 0) newRed = 0;
 
             int newGreen;
             if (temperature < 0)
-            newGreen = sourceColor.green() + temperature/1.3 + 10;
+            newGreen = sourceColor.green() + temperature*0.7;
             else
-            newGreen = sourceColor.green() + temperature/1.0 + 10 ;
+            newGreen = sourceColor.green() - temperature*0.7 ;
             if (newGreen > 255) newGreen = 255;
             if (newGreen < 0) newGreen = 0;
 
             int newBlue;
-            if (temperature < 0) newBlue = sourceColor.blue() + temperature/16 + 10;
-            else newBlue = sourceColor.blue() + temperature/18 + 10;
+            if (temperature < 0) newBlue = sourceColor.blue() - temperature;
+            else newBlue = sourceColor.blue() - temperature;
             if (newBlue > 255) newBlue = 255;
             if (newBlue < 0) newBlue = 0;
 
@@ -259,7 +295,6 @@ void QImageWidget::setupTemperature(int temperature)
     _changedImage = QPixmap::fromImage(editableImage);
 
 }
-
 
 
 void QImageWidget::setupSharpness(int sharpness)

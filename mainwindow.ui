@@ -412,6 +412,45 @@ background-color:white;
               <enum>Qt::AutoText</enum>
              </property>
             </widget>
+            <widget class="QLabel" name="label_11">
+             <property name="geometry">
+              <rect>
+               <x>20</x>
+               <y>270</y>
+               <width>81</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Поворот:</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButton_5">
+             <property name="geometry">
+              <rect>
+               <x>80</x>
+               <y>290</y>
+               <width>31</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&gt;</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="geometry">
+              <rect>
+               <x>50</x>
+               <y>290</y>
+               <width>31</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;</string>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -666,6 +705,8 @@ background-color:#EB0015;
     <slot>sharpnessChanged(int)</slot>
     <slot>temperatureChanged(int)</slot>
     <slot>sliderValueChanged()</slot>
+    <slot>rightRotate()</slot>
+    <slot>leftRotate()</slot>
     <slot>sliderBrightnessValueChanged()</slot>
     <slot>sliderContrastValueChanged()</slot>
     <slot>sliderSharpnessValueChanged()</slot>
@@ -941,8 +982,8 @@ background-color:#EB0015;
    <slot>sharpnessWeightChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>861</x>
-     <y>648</y>
+     <x>1042</x>
+     <y>740</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -957,8 +998,8 @@ background-color:#EB0015;
    <slot>sharpnessFactorChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>901</x>
-     <y>704</y>
+     <x>1082</x>
+     <y>801</y>
     </hint>
     <hint type="destinationlabel">
      <x>184</x>
@@ -973,8 +1014,8 @@ background-color:#EB0015;
    <slot>sharpnessOffsetChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>868</x>
-     <y>739</y>
+     <x>1049</x>
+     <y>855</y>
     </hint>
     <hint type="destinationlabel">
      <x>180</x>
@@ -989,8 +1030,8 @@ background-color:#EB0015;
    <slot>sliderSharpnessValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>834</x>
-     <y>656</y>
+     <x>1015</x>
+     <y>740</y>
     </hint>
     <hint type="destinationlabel">
      <x>181</x>
@@ -1005,8 +1046,8 @@ background-color:#EB0015;
    <slot>sliderSharpnessValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>889</x>
-     <y>700</y>
+     <x>1070</x>
+     <y>797</y>
     </hint>
     <hint type="destinationlabel">
      <x>194</x>
@@ -1021,12 +1062,44 @@ background-color:#EB0015;
    <slot>sliderSharpnessValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>892</x>
-     <y>743</y>
+     <x>1073</x>
+     <y>855</y>
     </hint>
     <hint type="destinationlabel">
      <x>194</x>
      <y>628</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>pressed()</signal>
+   <receiver>widget</receiver>
+   <slot>leftRotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>522</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>188</x>
+     <y>549</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>pressed()</signal>
+   <receiver>widget</receiver>
+   <slot>rightRotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>532</y>
     </hint>
    </hints>
   </connection>
