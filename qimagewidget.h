@@ -20,6 +20,7 @@ public:
     void setupBinaryGrayFilter();
     void setupBrightness(int brightness);
     void setupContrast(int contrast);
+    void setupTemperature(int temperature);
 
     private:
     QPixmap _viewImage;
