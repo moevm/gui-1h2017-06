@@ -59,6 +59,9 @@ color:#949494;
           <property name="toolTipDuration">
            <number>-1</number>
           </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
           <property name="styleSheet">
            <string notr="true">#comboBox{
 background:white;
@@ -355,13 +358,25 @@ background-color:white;
               </rect>
              </property>
              <property name="minimum">
-              <number>15</number>
+              <number>0</number>
              </property>
              <property name="maximum">
-              <number>35</number>
+              <number>20</number>
+             </property>
+             <property name="value">
+              <number>0</number>
              </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="invertedControls">
+              <bool>true</bool>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>2</number>
              </property>
             </widget>
             <widget class="QLabel" name="label_6">
@@ -386,8 +401,23 @@ background-color:white;
                <height>19</height>
               </rect>
              </property>
+             <property name="minimum">
+              <number>-100</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="singleStep">
+              <number>10</number>
+             </property>
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>20</number>
              </property>
             </widget>
             <widget class="QLabel" name="label_7">
@@ -544,7 +574,7 @@ background-color:#EB0015;
        <property name="geometry">
         <rect>
          <x>720</x>
-         <y>690</y>
+         <y>710</y>
          <width>211</width>
          <height>137</height>
         </rect>
@@ -630,7 +660,7 @@ background-color:#EB0015;
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Файл</string>
     </property>
     <addaction name="actionOk"/>
     <addaction name="action"/>
@@ -676,7 +706,7 @@ background-color:#EB0015;
   </action>
   <action name="action_3">
    <property name="text">
-    <string>Параметры</string>
+    <string>Обрезать</string>
    </property>
   </action>
   <action name="action_4">
@@ -714,6 +744,8 @@ background-color:#EB0015;
     <slot>sharpnessWeightChanged(int)</slot>
     <slot>sharpnessFactorChanged(int)</slot>
     <slot>sharpnessOffsetChanged(int)</slot>
+    <slot>crop()</slot>
+    <slot>startCropProcess()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -835,7 +867,7 @@ background-color:#EB0015;
    <sender>horizontalSliderBrightness</sender>
    <signal>sliderReleased()</signal>
    <receiver>widget</receiver>
-   <slot>sliderBrightnessValueChanged()</slot>
+   <slot>sliderValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>77</x>
@@ -851,7 +883,7 @@ background-color:#EB0015;
    <sender>horizontalSliderContrast</sender>
    <signal>sliderReleased()</signal>
    <receiver>widget</receiver>
-   <slot>sliderContrastValueChanged()</slot>
+   <slot>sliderValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>94</x>
@@ -867,7 +899,7 @@ background-color:#EB0015;
    <sender>horizontalSliderSharpness</sender>
    <signal>sliderReleased()</signal>
    <receiver>widget</receiver>
-   <slot>sliderSharpnessValueChanged()</slot>
+   <slot>sliderValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>83</x>
@@ -883,7 +915,7 @@ background-color:#EB0015;
    <sender>horizontalSlider_4</sender>
    <signal>sliderReleased()</signal>
    <receiver>widget</receiver>
-   <slot>sliderTemperatureValueChanged()</slot>
+   <slot>sliderValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>122</x>
@@ -967,11 +999,11 @@ background-color:#EB0015;
    <hints>
     <hint type="sourcelabel">
      <x>86</x>
-     <y>406</y>
+     <y>407</y>
     </hint>
     <hint type="destinationlabel">
-     <x>242</x>
-     <y>417</y>
+     <x>239</x>
+     <y>407</y>
     </hint>
    </hints>
   </connection>
@@ -982,8 +1014,8 @@ background-color:#EB0015;
    <slot>sharpnessWeightChanged(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1042</x>
-     <y>740</y>
+     <x>1109</x>
+     <y>761</y>
     </hint>
     <hint type="destinationlabel">
      <x>190</x>
@@ -1030,8 +1062,8 @@ background-color:#EB0015;
    <slot>sliderSharpnessValueChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1015</x>
-     <y>740</y>
+     <x>1109</x>
+     <y>761</y>
     </hint>
     <hint type="destinationlabel">
      <x>181</x>

@@ -25,6 +25,8 @@ private slots:
 
     void on_action_triggered();
 
+    void on_action_3_triggered();
+
 private:
     void setQImageWidget(QImageWidget *image);
     Ui::MainWindow *ui;

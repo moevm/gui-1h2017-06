@@ -36,3 +36,7 @@ void MainWindow::setQImageWidget(QImageWidget *image)
     this->image = image;
 }
 
+void MainWindow::on_action_3_triggered()
+{
+
+}

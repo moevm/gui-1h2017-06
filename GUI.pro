@@ -26,10 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     qimagewidget.cpp \
+    imagecropper.cpp
 
 
 HEADERS  += mainwindow.h \
     qimagewidget.h \
+    imagecropper_e.h \
+    imagecropper_p.h \
+    imagecropper.h
 
 FORMS    += mainwindow.ui
 

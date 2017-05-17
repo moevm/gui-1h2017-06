@@ -2,6 +2,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QFileDialog>
+#include "imagecropper.h"
 
 QPixmap* QImageWidget::_toSaveImage;
 
@@ -84,7 +85,7 @@ void QImageWidget::setupNegativeFilter()
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
-    setPixmap(_changedImage);
+//    setPixmap(_changedImage);
 }
 
 void QImageWidget::setupSepiaFilter()
@@ -100,7 +101,7 @@ void QImageWidget::setupSepiaFilter()
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
-    setPixmap(_changedImage);
+//    setPixmap(_changedImage);
 }
 
 void QImageWidget::setupGrayScaleFilter()
@@ -122,7 +123,7 @@ void QImageWidget::setupGrayScaleFilter()
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
-    setPixmap(_changedImage);
+//    setPixmap(_changedImage);
 }
 
 void QImageWidget::setupBinaryGrayFilter()
@@ -140,7 +141,7 @@ void QImageWidget::setupBinaryGrayFilter()
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
-    setPixmap(_changedImage);
+//    setPixmap(_changedImage);
 }
 
 void QImageWidget::setupBrightness(int brightness)
@@ -287,9 +288,6 @@ void QImageWidget::setupTemperature(int temperature)
 
             value = qRgb(newRed, newGreen, newBlue);
             editableImage.setPixel(i,j,value);
-
-
-
         }
     }
     _changedImage = QPixmap::fromImage(editableImage);
@@ -299,7 +297,8 @@ void QImageWidget::setupTemperature(int temperature)
 
 void QImageWidget::setupSharpness(int sharpness)
 {
-
+if(this->sharpness == 0)
+    return;
 //    qDebug()<<"SHARPNES SETUP";
 
 //    STATIC DEBUG
@@ -407,10 +406,12 @@ void QImageWidget::mousePress1()
 
 void QImageWidget::setupFilter(int choosen)
 {
+    this->curFilter = choosen;
     switch(choosen) {
     case (0):
         _changedImage = _originalImage;
         setPixmap(_changedImage);
+
         break;
     case (1):
         setupNegativeFilter();
@@ -425,6 +426,11 @@ void QImageWidget::setupFilter(int choosen)
         setupBinaryGrayFilter();
         break;
     }
+    setupBrightness(this->brightness);
+    setupContrast(this->contrast);
+    setupSharpness(this->sharpness);
+    setupTemperature(this->temperature);
+    setPixmap(_changedImage);
 }
 
 void QImageWidget::brightnessChanged(int brightness)
@@ -445,7 +451,7 @@ void QImageWidget::temperatureChanged(int temperature)
 
 void QImageWidget::sharpnessChanged(int sharpness)
 {
-    this->sharpness = sharpness;
+    this->sharpness = sharpness+15;
     if(sharpness>25)
         this->factor = 13;
     else if(sharpness<18)
@@ -458,22 +464,28 @@ void QImageWidget::sharpnessChanged(int sharpness)
 
 void QImageWidget::sliderValueChanged()
 {
-    _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
-    setupBrightness(this->brightness);
-    setupContrast(this->contrast);
-    setupSharpness(this->sharpness);
-	setupTemperature(this->temperature);
-    setPixmap(_changedImage);
+    qDebug()<<"sliderValueChanged";
+
+    //_changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
+    setupFilter(this->curFilter);
+
+    //setupBrightness(this->brightness);
+    //(this->contrast);
+    //setupSharpness(this->sharpness);
+    //setupTemperature(this->temperature);
+    //setPixmap(_changedImage);
 }
 
 
 void QImageWidget::sliderBrightnessValueChanged() {
+    qDebug()<<"sliderBrightnessValueChanged";
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupBrightness(this->brightness);
     setPixmap(_changedImage);
 }
 
 void QImageWidget::sliderContrastValueChanged() {
+    qDebug()<<"sliderContrastValueChanged";
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupContrast(this->contrast);
     setPixmap(_changedImage);
@@ -481,13 +493,16 @@ void QImageWidget::sliderContrastValueChanged() {
 
 void QImageWidget::sliderSharpnessValueChanged()
 {
+    qDebug()<<"sliderSharpnessValueChanged";
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupSharpness(this->sharpness);
+
     setPixmap(_changedImage);
 }
 
 void QImageWidget::sliderTemperatureValueChanged()
 {
+    qDebug()<<"sliderTemperatureValueChanged";
     _changedImage = _originalImage.copy(0,0,_originalImage.width(),_originalImage.height());
     setupTemperature(this->temperature);
     setPixmap(_changedImage);
@@ -507,4 +522,21 @@ void QImageWidget::sharpnessFactorChanged(int factor) {
 void QImageWidget::sharpnessOffsetChanged(int offset) {
     this->offset = offset;
 //    qDebug()<<"offset"<<offset;
+}
+
+void QImageWidget::crop()
+{
+    qDebug("Crop");
+    setPixmap(m_imageCropper->cropImage());
+}
+
+void QImageWidget::startCropProcess()
+{
+    qDebug ("StartCrop");
+    m_imageCropper = new ImageCropper((QWidget*)this->parent());
+    m_imageCropper->resize( 600, 600 );
+    m_imageCropper->setProportion(QSize(4,3));
+    m_imageCropper->setImage(_viewImage);
+    m_imageCropper->setBackgroundColor( Qt::lightGray );
+    m_imageCropper->setCroppingRectBorderColor( Qt::white);
 }

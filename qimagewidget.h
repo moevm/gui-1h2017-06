@@ -5,6 +5,7 @@
 #include <QPixmap>
 #include <QMargins>
 #include <QDebug>
+#include "imagecropper.h"
 
 class QImageWidget : public QWidget
 {
@@ -24,6 +25,7 @@ public:
     void setupSharpness(int sharpness);
 
 private:
+    ImageCropper* m_imageCropper;
     QPixmap _viewImage;
     QPixmap _originalImage;
     QPixmap _changedImage;
@@ -31,11 +33,12 @@ private:
     int brightness = 0;
     int contrast = 0;
     int temperature = 0;
-    int sharpness = 15;
+    int sharpness = 0;
         int weight = 0;
         int factor = 6;
         int offset = 0;
 
+    int curFilter = 0;
 
     QString _noImageMessage;
     QColor _backgroundColor;
@@ -55,6 +58,8 @@ private:
 
 
     public slots:
+    void crop();
+    void startCropProcess();
     void setChangedImage(QPixmap);
     //void mousePressEvent(QMouseEvent* event);
     void mousePress();
